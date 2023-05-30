@@ -1,6 +1,8 @@
 import 'package:http/http.dart';
 import 'dart:convert';
 
+import 'package:intl/intl.dart';
+
 class WorldTime {
   
     String location; // location name for the UI
@@ -32,7 +34,7 @@ class WorldTime {
   
         // set the time property
         isDaytime = now.hour > 6 && now.hour < 20 ? true : false;
-        time = now.toString();
+        time = DateFormat.jm().format(now);
       }
       catch (e) {
         print('caught error: $e'); // print error to console
