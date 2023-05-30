@@ -1,7 +1,6 @@
-import 'dart:convert';
+
 import 'package:world_time/services/world_time.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 
 class Loading extends StatefulWidget {
   const Loading({super.key});
@@ -12,17 +11,17 @@ class Loading extends StatefulWidget {
 
 class _LoadingState extends State<Loading> {
 
-  String time = 'Loading...';
-
   void setupWorldTime() async {
     WorldTime instance = WorldTime(
         location: 'Berlin', flag: 'germany.png', url: 'Europe/Berlin');
     await instance.getTime();
-    // Navigator.pushReplacementNamed(context, '/home');
-    print(instance.time); 
-    setState(() {
-      time = instance.time;
+    Navigator.pushReplacementNamed(context, '/home', arguments: {
+      'location': instance.location,
+      'flag': instance.flag,
+      'time': instance.time,
+      'isDaytime': instance.isDaytime
     });
+
   }
 
   @override
@@ -34,10 +33,10 @@ class _LoadingState extends State<Loading> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(50.0),
-        child: Text(time),
+        padding: EdgeInsets.all(50.0),
+        child: Text('Loading...'),
       ),
     );
   }
