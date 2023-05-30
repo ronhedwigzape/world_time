@@ -13,6 +13,7 @@ class WorldTime {
   
     Future<void> getTime() async {
   
+      // make try/catch block to catch errors 
       try {
         // make the request
         Response response = await get(Uri.parse('http://worldtimeapi.org/api/timezone/$url'));
@@ -34,9 +35,9 @@ class WorldTime {
         time = now.toString();
       }
       catch (e) {
-        print('caught error: $e');
-        time = 'could not get time data';
-      }
+        print('caught error: $e'); // print error to console
+        time = 'could not get time data'; // set time to error message
+      } 
   
     }
 }
